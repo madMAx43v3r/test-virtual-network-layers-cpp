@@ -1,6 +1,6 @@
 package test;
 
-module TestNode {
+object TestNode {
 	
 	int level = -1;
 	String instance = "blubb blubb";

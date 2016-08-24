@@ -8,21 +8,18 @@
 #ifndef TEST_TEST_TROUBLEMAKER_H_
 #define TEST_TEST_TROUBLEMAKER_H_
 
-#include <vnl/Module.h>
+#include <vnl/Object.h>
 #include <test/TestType.hxx>
 
 
 namespace test {
 
-class TroubleMaker : public vnl::Module {
+class TroubleMaker : public vnl::Object {
 public:
 	TroubleMaker(const vnl::String& domain_, const vnl::String& topic_)
-		:	Module(domain_, topic_)
+		:	Object(domain_, topic_)
 	{
-		dst = vnl::Address(my_domain, "test/topic");
 	}
-	
-	vnl::Address dst;
 	
 	int interval = 0;
 	int counter = 0;
@@ -44,7 +41,7 @@ protected:
 	void fire_machine_gun() {
 		TestType* data = vnl::create<TestType>();
 		data->time = vnl::currentTimeMicros();
-		publish(data, dst);
+		publish(data, my_domain, "test/topic");
 		counter++;
 		//std::this_thread::yield();	// for valgrind to switch threads
 	}

@@ -1,0 +1,13 @@
+package test;
+
+interface TestInterface {
+	
+	const String name = "test";
+	
+	int magic = 1337;
+	
+	int compute(double input) const;
+	
+	void boom();
+	
+}
