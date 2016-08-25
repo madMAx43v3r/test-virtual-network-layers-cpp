@@ -10,6 +10,12 @@ class TestValue {
 	
 }
 
+class TestValueEx extends TestValue {
+	
+	String blubb;
+	
+}
+
 struct test_value_t {
 	
 	float pos[3];
