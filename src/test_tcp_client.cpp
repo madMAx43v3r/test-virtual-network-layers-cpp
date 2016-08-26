@@ -16,11 +16,10 @@ int main() {
 	
 	vnl::Layer layer("test_tcp_client");
 	
-	vnl::Address addr = vnl::spawn(new vnl::TcpClient("localhost"));
-	
 	vnl::ThreadEngine engine;
-	vnl::TcpClientClient uplink;
-	uplink.set_address(addr);
+	
+	vnl::UplinkClient uplink;
+	uplink = vnl::spawn(new vnl::TcpClient("localhost"));
 	uplink.connect(&engine);
 	
 	vnl::Topic topic;
