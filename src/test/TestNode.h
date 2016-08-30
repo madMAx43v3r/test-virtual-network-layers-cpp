@@ -27,7 +27,7 @@ protected:
 	void main(vnl::Engine* engine, vnl::Message* init) {
 		log(INFO).out << "Hello World: level=" << level << ", instance=" << instance << vnl::endl;
 		set_timeout(1000*1000, std::bind(&TestNode::print_stats, this), VNL_TIMER_REPEAT);
-		subscribe(vnl::Address(my_domain, "test/topic"));
+		subscribe(my_domain, "test/topic");
 		init->ack();
 		run();
 	}

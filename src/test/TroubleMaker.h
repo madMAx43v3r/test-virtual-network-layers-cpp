@@ -19,6 +19,7 @@ public:
 	TroubleMaker(const vnl::String& domain_, const vnl::String& topic_)
 		:	Object(domain_, topic_)
 	{
+		vnl_max_num_pending = 100;
 	}
 	
 	int interval = 0;
@@ -34,7 +35,7 @@ protected:
 	}
 	
 	void print_stats() {
-		log(INFO).out << "counter = " << vnl::dec(counter) << " (System: " << vnl::Page::get_num_alloc() << " Pages, " << vnl::Block::get_num_alloc() << " Blocks)" << vnl::endl;
+		log(INFO).out << "counter = " << counter << " (System: " << vnl::Page::get_num_alloc() << " Pages, " << vnl::Block::get_num_alloc() << " Blocks)" << vnl::endl;
 		counter = 0;
 	}
 	
