@@ -14,12 +14,12 @@
 
 int main() {
 	
-	vnl::Layer layer("test_module");
+	vnl::Layer layer("test_module", "config/");
 	
 	usleep(1000*100);
 	
-	vnl::spawn(new test::TroubleMaker("default", "test/trouble"));
-	vnl::spawn(new test::TestNode("default", "test/node"));
+	vnl::spawn(new test::TroubleMaker(vnl::local_domain_name, "test.trouble"));
+	vnl::spawn(new test::TestNode(vnl::local_domain_name, "test.node"));
 	
 	vnl::run(new vnl::Terminal());
 	
