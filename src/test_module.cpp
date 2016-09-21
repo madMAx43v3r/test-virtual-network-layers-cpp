@@ -16,8 +16,6 @@ int main() {
 	
 	vnl::Layer layer("test_module", "config/");
 	
-	usleep(1000*100);
-	
 	vnl::spawn(new test::TroubleMaker(vnl::local_domain_name, "test.trouble"));
 	vnl::spawn(new test::TestNode(vnl::local_domain_name, "test.node"));
 	

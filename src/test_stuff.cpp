@@ -28,7 +28,7 @@
 
 int main() {
 	
-	int N = 100;
+	int N = 10;
 	int M = 10000;
 	
 	{
@@ -37,18 +37,9 @@ int main() {
 			for(int i = 0; i < M; ++i) {
 				test.push(i);
 			}
-			int c = 0;
-			for(int k : test) {
-				c++;
-			}
-			assert(c == M);
-			c = 0;
-			for(int k : test) {
-				assert(k == c);
-				c++;
-			}
+			assert(test.size() == M);
 			for(int i = 0; i < M; ++i) {
-				int k = 0;
+				int k;
 				assert(test.pop(k));
 				assert(k == i);
 			}
@@ -56,6 +47,56 @@ int main() {
 				test.push(i);
 			}
 			test.clear();
+			assert(test.size() == 0);
+		}
+	}
+	
+	{
+		vnl::List<int> test;
+		for(int iter = 0; iter < N; ++iter) {
+			for(int i = 0; i < M; ++i) {
+				test.push_back(i);
+			}
+			int c = 0;
+			for(int k : test) {
+				assert(k == c);
+				c++;
+			}
+			assert(c == M);
+			for(int i = 0; i < M; ++i) {
+				int k;
+				assert(test.pop_front(k));
+				assert(k == i);
+			}
+			assert(test.size() == 0);
+			for(int i = 0; i < M; ++i) {
+				test.push_front(i);
+			}
+			c = M;
+			for(int k : test) {
+				c--;
+				assert(k == c);
+			}
+			for(int i = 0; i < M; ++i) {
+				int k;
+				assert(test.pop_back(k));
+				assert(k == i);
+			}
+			assert(test.size() == 0);
+			for(int i = 0; i < M; ++i) {
+				test.push_back(i);
+			}
+			test.erase(++test.begin());
+			assert(test[1] == 2);
+			assert(test.front() == 0);
+			test.erase(--(--test.end()));
+			assert(test[M-4] == M-3);
+			assert(test.back() == M-1);
+			assert(test.size() == M-2);
+			test.remove(0);
+			assert(test.size() == M-3);
+			test.clear();
+			assert(test.size() == 0);
 			for(int k : test) {
 				assert(false);
 			}

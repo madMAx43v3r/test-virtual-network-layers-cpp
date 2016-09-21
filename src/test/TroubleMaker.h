@@ -39,14 +39,14 @@ protected:
 	}
 	
 	void print_stats() {
-		log(INFO).out << "counter = " << counter << " (System: " << vnl::Page::get_num_alloc() << " Pages, " << vnl::Block::get_num_alloc() << " Blocks)" << vnl::endl;
+		log(INFO).out << "counter = " << counter << vnl::endl;
 		counter = 0;
 	}
 	
 	void fire_machine_gun() {
 		TestType* data = vnl::create<TestType>();
 		data->time = vnl::currentTimeMicros();
-		publish(data, my_domain, "test/topic");
+		publish(data, "test", "test.topic");
 		counter++;
 		//std::this_thread::yield();	// for valgrind to switch threads
 	}

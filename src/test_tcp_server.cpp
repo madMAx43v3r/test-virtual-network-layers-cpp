@@ -14,12 +14,12 @@
 
 int main() {
 	
-	vnl::Layer layer("test_tcp_server");
+	vnl::Layer layer("test_tcp_server", "config/");
 	
 	vnl::TcpServer* server = new vnl::TcpServer();
 	vnl::spawn(server);
 	
-	vnl::spawn(new test::TroubleMaker("test", "test/trouble"));
+	vnl::spawn(new test::TroubleMaker(vnl::local_domain_name, "test.trouble"));
 	
 	vnl::run(new vnl::Terminal());
 	

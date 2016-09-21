@@ -16,7 +16,8 @@ int main() {
 	
 	vnl::Layer layer("test_type_stream");
 	
-	vnl::io::ByteBuffer buf;
+	vnl::Page* data = vnl::Page::alloc();
+	vnl::io::ByteBuffer buf(data);
 	vnl::io::TypeOutput out(&buf);
 	
 	test::TestType input;
@@ -41,6 +42,8 @@ int main() {
 	}
 	
 	std::cout << output.to_string() << std::endl;
+	
+	data->free_all();
 	
 }
 

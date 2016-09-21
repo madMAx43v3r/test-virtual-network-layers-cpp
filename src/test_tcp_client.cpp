@@ -6,6 +6,7 @@
  */
 
 #include <vnl/TcpClient.h>
+#include <vnl/UplinkClient.hxx>
 #include <vnl/ThreadEngine.h>
 #include <vnl/Terminal.h>
 
@@ -24,7 +25,7 @@ int main() {
 	
 	vnl::Topic topic;
 	topic.domain = "test";
-	topic.name = "test/topic";
+	topic.name = "test.topic";
 	uplink.subscribe(topic);
 	
 	vnl::spawn(new test::TestNode("test", "test/node"));
@@ -32,5 +33,4 @@ int main() {
 	vnl::run(new vnl::Terminal());
 	
 }
-
 

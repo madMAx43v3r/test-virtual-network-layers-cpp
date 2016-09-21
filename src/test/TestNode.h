@@ -27,14 +27,13 @@ protected:
 	void main(vnl::Engine* engine, vnl::Message* init) {
 		log(INFO).out << "Hello World: level=" << level << ", instance=" << instance << vnl::endl;
 		set_timeout(1000*1000, std::bind(&TestNode::print_stats, this), VNL_TIMER_REPEAT);
-		subscribe(my_domain, "test/topic");
+		subscribe("test", "test.topic");
 		init->ack();
 		run();
 	}
 	
 	void print_stats() {
-		log(INFO).out << "counter = " << vnl::dec(counter) << " latency=" << latency
-				<< " (System: " << vnl::Page::get_num_alloc() << " Pages, " << vnl::Block::get_num_alloc() << " Blocks)" << vnl::endl;
+		log(INFO).out << "counter = " << vnl::dec(counter) << " latency=" << latency << vnl::endl;
 		counter = 0;
 	}
 	

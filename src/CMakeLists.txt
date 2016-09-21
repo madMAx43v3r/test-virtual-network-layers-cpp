@@ -1,6 +1,9 @@
 
 include_directories(./)
 
+add_executable(test_stuff test_stuff.cpp)
+target_link_libraries(test_stuff)
+
 add_executable(test_module test_module.cpp)
 target_link_libraries(test_module vnl vni)
 
