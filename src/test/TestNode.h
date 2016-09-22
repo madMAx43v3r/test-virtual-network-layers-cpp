@@ -32,14 +32,19 @@ protected:
 		run();
 	}
 	
+	bool handle(vnl::Packet* pkt) {
+		return Super::handle(pkt);
+	}
+	
 	void print_stats() {
 		log(INFO).out << "counter = " << vnl::dec(counter) << " latency=" << latency << vnl::endl;
 		counter = 0;
+		latency = 0;
 	}
 	
 	void handle(const TestType& ev, const vnl::Packet& packet) {
 		int64_t now = vnl::currentTimeMicros();
-		latency = now - ev.time;
+		latency = std::max(int(now - ev.time), latency);
 		counter++;
 	}
 	

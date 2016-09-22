@@ -9,6 +9,8 @@
 #include <vnl/UplinkClient.hxx>
 #include <vnl/ThreadEngine.h>
 #include <vnl/Terminal.h>
+#include <vnl/TcpServer.h>
+#include <vnl/Recorder.h>
 
 #include <test/TestNode.h>
 
@@ -16,6 +18,15 @@
 int main() {
 	
 	vnl::Layer layer("test_tcp_client");
+	
+	vnl::TcpServer* server = new vnl::TcpServer(4444);
+	vnl::spawn(server);
+	
+	if(false) {
+		vnl::Recorder* module = new vnl::Recorder(vnl::local_domain_name);
+		module->domains.push_back("test");
+		vnl::spawn(module);
+	}
 	
 	vnl::ThreadEngine engine;
 	
@@ -28,7 +39,7 @@ int main() {
 	topic.name = "test.topic";
 	uplink.subscribe(topic);
 	
-	vnl::spawn(new test::TestNode("test", "test/node"));
+	vnl::spawn(new test::TestNode("test", "test.node"));
 	
 	vnl::run(new vnl::Terminal());
 	
