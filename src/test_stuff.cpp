@@ -206,8 +206,8 @@ int main() {
 	
 	vnl::Page::cleanup();
 	vnl::Block::cleanup();
-	assert(vnl::Page::get_num_alloc() == 0);
-	assert(vnl::Block::get_num_alloc() == 0);
+	assert(vnl::Page::num_alloc == 0);
+	assert(vnl::Block::num_alloc == 0);
 	
 }
 
