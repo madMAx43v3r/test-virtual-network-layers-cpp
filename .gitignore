@@ -32,6 +32,8 @@
 .cproject
 
 /generated
+/tmp
+/installs
 
 CMakeCache.txt
 CMakeFiles
