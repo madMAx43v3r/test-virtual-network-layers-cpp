@@ -138,7 +138,7 @@ int main() {
 				assert(test.size() == i+1);
 			}
 			int i = 0;
-			for(auto pair : test.entries()) {
+			for(auto entry : test) {
 				i++;
 			}
 			assert(i == M);
@@ -153,8 +153,13 @@ int main() {
 			}
 			assert(test.size() == 0);
 			for(uint64_t key : keys) {
-				test[key] = 1337;
+				test[key] = key;
 			}
+			for(auto it = test.begin(); it != test.end();) {
+				it = test.erase(it);
+			}
+			assert(test.size() == 0);
+			test[1337] = 1337;
 			test.clear();
 			assert(test.size() == 0);
 		}

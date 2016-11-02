@@ -30,22 +30,25 @@ public:
 	int counter = 0;
 	
 protected:
-	void main(vnl::Engine* engine, vnl::Message* init) {
-		set_timeout(1000*1000, std::bind(&TroubleMaker::print_stats, this), VNL_TIMER_REPEAT);
-		init->ack();
+	void main() {
 		log(INFO).out << "trouble begins with interval=" << interval << " ..." << vnl::endl;
+		set_timeout(1000*1000, std::bind(&TroubleMaker::print_stats, this), VNL_TIMER_REPEAT);
 		set_timeout(interval, std::bind(&TroubleMaker::fire_machine_gun, this), VNL_TIMER_REPEAT);
 		run();
 	}
 	
 	void print_stats() {
-		log(INFO).out << "counter = " << counter << vnl::endl;
+		log(INFO).out << "counter=" << counter << vnl::endl;
 		counter = 0;
 	}
 	
 	void fire_machine_gun() {
 		TestType* data = vnl::create<TestType>();
 		data->time = vnl::currentTimeMicros();
+		data->text = "sdfswdfasfasfafasdasdasdasdsd";
+		data->list.push_back();
+		data->list.push_back();
+		data->list.push_back();
 		publish(data, "test", "test.topic");
 		counter++;
 		//std::this_thread::yield();	// for valgrind to switch threads

@@ -24,27 +24,24 @@ public:
 	int latency = 0;
 	
 protected:
-	void main(vnl::Engine* engine, vnl::Message* init) {
+	void main() {
 		log(INFO).out << "Hello World: level=" << level << ", instance=" << instance << vnl::endl;
 		set_timeout(1000*1000, std::bind(&TestNode::print_stats, this), VNL_TIMER_REPEAT);
 		subscribe("test", "test.topic");
-		init->ack();
 		run();
 	}
 	
-	bool handle(vnl::Packet* pkt) {
-		return Super::handle(pkt);
-	}
-	
 	void print_stats() {
-		log(INFO).out << "counter = " << vnl::dec(counter) << " latency=" << latency << vnl::endl;
+		log(INFO).out << "counter=" << counter << " latency=" << latency << vnl::endl;
 		counter = 0;
 		latency = 0;
 	}
 	
-	void handle(const TestType& ev, const vnl::Packet& packet) {
+	void handle(const TestType& ev) {
 		int64_t now = vnl::currentTimeMicros();
-		latency = std::max(int(now - ev.time), latency);
+		TestType* tmp = ev.clone();
+		latency = std::max(int(now - tmp->time), latency);
+		vnl::destroy(tmp);
 		counter++;
 	}
 	
