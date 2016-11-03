@@ -152,13 +152,6 @@ int main() {
 				i++;
 			}
 			assert(test.size() == 0);
-			for(uint64_t key : keys) {
-				test[key] = key;
-			}
-			for(auto it = test.begin(); it != test.end();) {
-				it = test.erase(it);
-			}
-			assert(test.size() == 0);
 			test[1337] = 1337;
 			test.clear();
 			assert(test.size() == 0);

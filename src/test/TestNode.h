@@ -39,9 +39,7 @@ protected:
 	
 	void handle(const TestType& ev) {
 		int64_t now = vnl::currentTimeMicros();
-		TestType* tmp = ev.clone();
-		latency = std::max(int(now - tmp->time), latency);
-		vnl::destroy(tmp);
+		latency = std::max(int(now - ev.time), latency);
 		counter++;
 	}
 	
