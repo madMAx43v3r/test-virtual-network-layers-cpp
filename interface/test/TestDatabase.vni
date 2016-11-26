@@ -1,0 +1,23 @@
+package test;
+
+class User {
+	
+	Hash64 id;
+	String name;
+	
+}
+
+object TestDatabase extends Database {
+	
+	void add_user(User user);
+	
+	void update_user_name(Hash64 id, String new_name);
+	
+	void del_user(Hash64 id);
+	
+	User get_user_by_id(Hash64 id) const;
+	User get_user_by_name(String name) const;
+	
+	int get_user_count() const;
+	
+}
