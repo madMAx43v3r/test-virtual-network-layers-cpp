@@ -9,6 +9,7 @@
 #define SRC_TEST_TESTDATABASE_H_
 
 #include <test/TestDatabaseSupport.hxx>
+#include <vnl/DuplicateKeyException.hxx>
 
 
 namespace test {
@@ -22,10 +23,11 @@ public:
 	
 protected:
 	void add_user(const User& user) {
-		if(!user_by_name.find(user.name)) {
-			user_table[user.id] = user;
-			user_by_name[user.name] = user.id;
+		if(user_by_name.find(user.name)) {
+			throw vnl::DuplicateKeyException();
 		}
+		user_table[user.id] = user;
+		user_by_name[user.name] = user.id;
 	}
 	
 	void update_user_name(const vnl::Hash64& id, const vnl::String& new_name) {
