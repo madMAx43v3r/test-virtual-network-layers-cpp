@@ -21,3 +21,9 @@ object TestDatabase extends Database {
 	int get_user_count() const;
 	
 }
+
+object UserTable extends Table<User> {
+	
+	
+	
+}

@@ -26,6 +26,9 @@ protected:
 		if(user_by_name.find(user.name)) {
 			throw vnl::DuplicateKeyException();
 		}
+		if(user_table.find(user.id)) {
+			throw vnl::DuplicateKeyException();
+		}
 		user_table[user.id] = user;
 		user_by_name[user.name] = user.id;
 	}
