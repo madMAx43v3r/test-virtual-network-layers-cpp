@@ -100,6 +100,21 @@ int main() {
 			for(int k : test) {
 				assert(false);
 			}
+			for(int i = 0; i < M; ++i) {
+				test.push_back(i);
+			}
+			for(int i = 0; i < M; ++i) {
+				test.push_back(i);
+				int k;
+				assert(test.pop_front(k));
+				assert(k == i);
+			}
+			c = 0;
+			for(int k : test) {
+				assert(k == c);
+				c++;
+			}
+			test.clear();
 		}
 	}
 	
