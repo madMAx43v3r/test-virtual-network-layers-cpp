@@ -22,5 +22,6 @@ target_link_libraries(test_tcp_client vnl vni)
 add_executable(test_database test_database.cpp)
 target_link_libraries(test_database vnl vni)
 
-
+add_executable(test_table test_table.cpp)
+target_link_libraries(test_table vnl vni)
 

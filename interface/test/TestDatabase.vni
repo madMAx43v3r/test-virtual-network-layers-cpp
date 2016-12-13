@@ -24,6 +24,8 @@ object TestDatabase extends Database {
 
 object UserTable extends Table<User> {
 	
+	User get_by_name(String name) const;
 	
+	int get_count() const;
 	
 }

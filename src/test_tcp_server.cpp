@@ -16,7 +16,7 @@ int main() {
 	
 	vnl::Layer layer("test_tcp_server", "config/");
 	
-	vnl::TcpServer* server = new vnl::TcpServer("TcpServer");
+	vnl::TcpServer* server = new vnl::TcpServer(vnl::local_domain_name, "TcpServer");
 	vnl::spawn(server);
 	
 	vnl::spawn(new test::TroubleMaker(vnl::local_domain_name, "test.trouble"));

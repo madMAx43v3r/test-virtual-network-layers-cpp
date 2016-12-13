@@ -22,9 +22,6 @@ int main() {
 	
 	vnl::Layer layer("test_tcp_client");
 	
-	vnl::TcpServer* server = new vnl::TcpServer("TcpServer", 4444);
-	vnl::spawn(server);
-	
 	if(false) {
 		vnl::Recorder* module = new vnl::Recorder(vnl::local_domain_name);
 		module->domains.push_back("test");
@@ -33,7 +30,9 @@ int main() {
 	
 	vnl::ThreadEngine engine;
 	
-	vnl::UplinkClient uplink = vnl::spawn(new vnl::TcpClient("TcpClient", "localhost"));
+	vnl::TcpClient* client = new vnl::TcpClient(vnl::local_domain_name, "TcpClient");
+	client->endpoint = "localhost";
+	vnl::UplinkClient uplink = vnl::spawn(client);
 	uplink.connect(&engine);
 	uplink.subscribe("test", "test.topic");
 	
