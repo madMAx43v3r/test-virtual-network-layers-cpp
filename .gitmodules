@@ -1,3 +1,6 @@
 [submodule "lib/virtual-network-layers-cpp"]
 	path = lib/virtual-network-layers-cpp
 	url = https://github.com/madMAx43v3r/virtual-network-layers-cpp.git
+[submodule "lib/virtual-network-interface"]
+	path = lib/virtual-network-interface
+	url = https://github.com/madMAx43v3r/virtual-network-interface.git
