@@ -24,15 +24,10 @@ public:
 		if(value) {
 			vnl::from_string(*value, interval);
 		}
-		value = vnl::Layer::get_config(domain_, topic_, "use_pin");
-		if(value) {
-			vnl::from_string(*value, use_pin);
-		}
 	}
 	
 	int interval = 0;
 	int counter = 0;
-	bool use_pin = false;
 	
 	vnl::TypedOutputPin<TestType> output;
 	
@@ -57,11 +52,8 @@ protected:
 		data->list.push_back();
 		data->list.push_back();
 		data->list.push_back();
-		if(use_pin) {
-			output.transmit(data);
-		} else {
-			publish(data, "test", "test.topic");
-		}
+		output.transmit(data->clone());
+		publish(data, "test", "test.topic");
 		counter++;
 		//std::this_thread::yield();	// for valgrind to switch threads
 	}
