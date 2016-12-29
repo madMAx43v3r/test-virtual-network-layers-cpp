@@ -1,0 +1,86 @@
+
+
+var blubb = 1337;
+
+var some = { id = 42, name = "blubb", test = blubb };
+
+class User {
+	
+	var id = 0;
+	var name;
+	var text;
+	var items = [];
+	
+	var my = {
+		password = "1234",
+		some = []
+	}
+	
+	var set_name = (name = "test") {
+		.name << name + "_aaa";
+	}
+	
+	var get_stuff = () {
+		
+		if(.name == "test") {
+			return nil;
+		}
+		
+		<= .text;
+	}
+	
+}
+
+class Admin extends User {
+	
+	var special = #YES;
+	
+}
+
+var user = User(name = "test_01", id = 1337);
+
+user.set_name("blubb");
+[user] User.set_name("blubb");
+
+var list = [0];
+list += [1, 2, 3];
+
+for(x : list) {
+	x += 1;
+}
+for(x : ~list) {
+	echo x;
+}
+
+var first = list[0];
+var last = list[-1];
+
+first = --list;			// pop front
+last = list--;			// pop back
+
+list++ = first;			// push back
+++list = last;			// push front
+
+list++ = ~first;		// push back move
+++list = ~last;			// push front move
+
+user.items << list;
+
+[user, list] {
+	.items << list;
+}
+
+var func = () {
+	.items << arg;
+}
+
+[user] func(arg = list);
+
+
+handle #test.SomeType = () {
+	if(msg.dst.topic == #blubb) {
+		
+	}
+}
+
+run();

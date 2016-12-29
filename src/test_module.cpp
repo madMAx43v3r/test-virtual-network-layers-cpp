@@ -16,11 +16,15 @@ int main() {
 	
 	vnl::Layer layer("test_module", "config/");
 	
-	vnl::spawn(new test::TroubleMaker(vnl::local_domain_name, "test.trouble"));
+	test::TroubleMaker* trouble = new test::TroubleMaker(vnl::local_domain_name, "test.trouble");
 	
 	for(int i = 0; i < 1; ++i) {
-		vnl::spawn(new test::TestNode(vnl::local_domain_name, "test.node"));
+		test::TestNode* node = new test::TestNode(vnl::local_domain_name, "test.node");
+		vnl::connect(node->input, trouble->output);
+		vnl::spawn(node);
 	}
+	
+	vnl::spawn(trouble);
 	
 	vnl::run(new vnl::Terminal());
 	

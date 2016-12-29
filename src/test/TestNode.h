@@ -23,11 +23,14 @@ public:
 	int counter = 0;
 	int latency = 0;
 	
+	vnl::TypedInputPin<TestType> input;
+	
 protected:
-	void main() {
+	void main(vnl::Engine* engine) {
 		log(INFO).out << "Hello World: level=" << level << ", instance=" << instance << vnl::endl;
 		set_timeout(1000*1000, std::bind(&TestNode::print_stats, this), VNL_TIMER_REPEAT);
 		subscribe("test", "test.topic");
+		input.enable(engine, this);
 		run();
 	}
 	

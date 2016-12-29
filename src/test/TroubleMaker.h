@@ -24,16 +24,24 @@ public:
 		if(value) {
 			vnl::from_string(*value, interval);
 		}
+		value = vnl::Layer::get_config(domain_, topic_, "use_pin");
+		if(value) {
+			vnl::from_string(*value, use_pin);
+		}
 	}
 	
 	int interval = 0;
 	int counter = 0;
+	bool use_pin = false;
+	
+	vnl::TypedOutputPin<TestType> output;
 	
 protected:
-	void main() {
+	void main(vnl::Engine* engine) {
 		log(INFO).out << "trouble begins with interval=" << interval << " ..." << vnl::endl;
 		set_timeout(1000*1000, std::bind(&TroubleMaker::print_stats, this), VNL_TIMER_REPEAT);
 		set_timeout(interval, std::bind(&TroubleMaker::fire_machine_gun, this), VNL_TIMER_REPEAT);
+		output.enable(engine);
 		run();
 	}
 	
@@ -43,13 +51,17 @@ protected:
 	}
 	
 	void fire_machine_gun() {
-		TestType* data = vnl::create<TestType>();
+		TestType* data = TestType::create();
 		data->time = vnl::currentTimeMicros();
 		data->text = "sdfswdfasfasfafasdasdasdasdsd";
 		data->list.push_back();
 		data->list.push_back();
 		data->list.push_back();
-		publish(data, "test", "test.topic");
+		if(use_pin) {
+			output.transmit(data);
+		} else {
+			publish(data, "test", "test.topic");
+		}
 		counter++;
 		//std::this_thread::yield();	// for valgrind to switch threads
 	}
