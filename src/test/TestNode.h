@@ -26,11 +26,11 @@ public:
 	vnl::TypedInputPin<TestType> input;
 	
 protected:
-	void main(vnl::Engine* engine) {
+	void main() {
 		log(INFO).out << "Hello World: level=" << level << ", instance=" << instance << vnl::endl;
 		set_timeout(1000*1000, std::bind(&TestNode::print_stats, this), VNL_TIMER_REPEAT);
 		subscribe("test", "test.topic");
-		input.enable(engine, this);
+		add_input(input);
 		run();
 	}
 	
@@ -64,7 +64,7 @@ protected:
 	
 };
 
-}
 
+}
 
 #endif /* TEST_TESTNODE_H_ */

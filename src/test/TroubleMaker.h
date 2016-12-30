@@ -20,7 +20,7 @@ public:
 		:	Object(domain_, topic_)
 	{
 		vnl_max_num_pending = 100;
-		const vnl::String* value = vnl::Layer::get_config(domain_, topic_, "interval");
+		const vnl::String* value = vnl::get_config(domain_, topic_, "interval");
 		if(value) {
 			vnl::from_string(*value, interval);
 		}
@@ -32,11 +32,11 @@ public:
 	vnl::TypedOutputPin<TestType> output;
 	
 protected:
-	void main(vnl::Engine* engine) {
+	void main() {
 		log(INFO).out << "trouble begins with interval=" << interval << " ..." << vnl::endl;
 		set_timeout(1000*1000, std::bind(&TroubleMaker::print_stats, this), VNL_TIMER_REPEAT);
 		set_timeout(interval, std::bind(&TroubleMaker::fire_machine_gun, this), VNL_TIMER_REPEAT);
-		output.enable(engine);
+		add_output(output);
 		run();
 	}
 	
