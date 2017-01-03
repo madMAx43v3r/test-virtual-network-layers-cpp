@@ -17,8 +17,8 @@
 
 int main() {
 	
-	vnl::Page::prealloc(1000);
-	vnl::Block::prealloc(10000);
+	//vnl::Page::prealloc(1000);
+	//vnl::Block::prealloc(10000);
 	
 	vnl::Layer layer("test_tcp_client");
 
