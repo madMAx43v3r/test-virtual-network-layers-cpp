@@ -6,6 +6,7 @@
  */
 
 #include <vnl/ThreadEngine.h>
+#include <vnl/TcpServer.h>
 #include <vnl/Terminal.h>
 
 #include <test/TestNode.h>
@@ -16,6 +17,8 @@ int main() {
 	
 	vnl::Layer layer("test_module", "config/");
 	
+	vnl::spawn(new vnl::TcpServer(vnl::local_domain_name, "TcpServer"));
+
 	test::TroubleMaker* trouble = new test::TroubleMaker(vnl::local_domain_name, "test.trouble");
 	
 	for(int i = 0; i < 1; ++i) {

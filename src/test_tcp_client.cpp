@@ -21,6 +21,12 @@ int main() {
 	vnl::Block::prealloc(10000);
 	
 	vnl::Layer layer("test_tcp_client");
+
+	{
+		vnl::TcpServer* module = new vnl::TcpServer(vnl::local_domain_name, "TcpServer");
+		module->port = 8917;
+		vnl::spawn(module);
+	}
 	
 	if(false) {
 		vnl::Recorder* module = new vnl::Recorder(vnl::local_domain_name);
