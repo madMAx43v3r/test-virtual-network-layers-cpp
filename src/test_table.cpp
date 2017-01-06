@@ -50,10 +50,10 @@ int main() {
 	
 	{
 		test::User user = client.get_by_name("test_user_0");
-		client.update(user.id, "name", vnl::to_binary("test_user_0_tmp"));
+		client.update(user.id, "name", "test_user_0_tmp");
 		test::User user2 = client.get_by_name("test_user_0_tmp");
 		assert(user.id == user2.id);
-		client.update(user.id, "name", vnl::to_binary("test_user_0"));
+		client.update(user.id, "name", "test_user_0");
 		user2 = client.get_by_name("test_user_0");
 		assert(user.id == user2.id);
 	}
