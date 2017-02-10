@@ -224,4 +224,8 @@ int main() {
 	
 }
 
+namespace vnl {
+	void raise_out_of_memory() {}
+}
+
 
