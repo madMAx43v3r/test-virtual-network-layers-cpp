@@ -31,6 +31,8 @@
 .project
 .cproject
 
+*.dat
+
 /generated
 /tmp
 /installs

@@ -4,5 +4,5 @@ cd lib/virtual-network-interface
 ./build_all.sh
 cd ../..
 
-./lib/virtual-network-interface/vnicppcodegen lib/virtual-network-layers-cpp/interface interface/
+./lib/virtual-network-interface/vnicppcodegen -x lib/virtual-network-layers-cpp/interface interface/
 
