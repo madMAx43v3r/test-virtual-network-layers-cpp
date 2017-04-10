@@ -23,8 +23,7 @@
 #include "vnl/Map.h"
 #include "vnl/String.h"
 #include "vnl/Algorithm.h"
-
-#include "../src/CRC64.cpp"
+#include "vnl/Layer.h"
 
 int main() {
 	
@@ -222,10 +221,6 @@ int main() {
 	assert(vnl::Page::num_alloc == 0);
 	assert(vnl::Block::num_alloc == 0);
 	
-}
-
-namespace vnl {
-	void raise_out_of_memory() {}
 }
 
 
